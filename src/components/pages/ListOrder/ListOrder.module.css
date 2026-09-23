@@ -1,0 +1,103 @@
+.order {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 48px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Card container otomatis untuk section pembungkus table */
+.order > section:last-child {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table td {
+  padding: 18px 24px;
+  font-size: 14px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+/* Penomoran */
+.table td:nth-child(1) {
+  color: #94a3b8;
+  font-weight: 600;
+  width: 60px;
+}
+
+/* Nama Pelanggan */
+.table td:nth-child(2) {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* Total Harga */
+.table td:nth-child(4) {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Baris Hover & Baris Terakhir */
+.table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.action {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
