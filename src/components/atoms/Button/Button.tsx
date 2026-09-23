@@ -1,14 +1,25 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
+import styles from "./Button.module.css";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  variant?: "primary" | "secondary" | "danger";
+interface PropTypes {
+  type?: "button" | "submit" | "reset";
+  children: string;
+  onClick?: () => void;
+  className?: string;
+  color?: "primary" | "secondary";
 }
 
-const Button = () => {
-  <button>
-    
-  </button>
+const Button = (props: PropTypes) => {
+  const { type = "button", children, color = "primary", className } = props;
+  return (
+    <button
+      className={`${styles.button} ${styles[`button-${color}`]} ${className}`}
+      type={type}
+      {...props}
+    >
+      {children}
+    </button>
+  );
 };
 
 export default Button;
