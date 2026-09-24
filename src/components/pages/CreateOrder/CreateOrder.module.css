@@ -1,0 +1,90 @@
+.create {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 48px 24px;
+}
+
+.menu {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menu h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+/* Kategori Filter Tabs */
+.filter {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 32px;
+}
+
+/* Grid Kartu Menu */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Kartu Makanan */
+.item {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.item:hover {
+  transform: translateY(-4px);
+  border-color: #cbd5e1;
+  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.08);
+}
+
+.image {
+  width: 100%;
+  min-width: 0;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 14px;
+  background-color: #f1f5f9;
+  border: 1px solid #f1f5f9;
+}
+
+.item h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 14px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+/* Baris Bawah (Harga & Tombol Order) */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed #f1f5f9;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #16a34a;
+}
