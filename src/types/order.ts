@@ -1,7 +1,18 @@
+interface IMenu {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image_url: string;
+  category: string;
+  is_available: boolean;
+}
+
 interface ICard {
   menuId: string;
   quantity: number;
   notes: string;
+  menuItem?: IMenu;
 }
 
 interface IOrder {
@@ -9,7 +20,7 @@ interface IOrder {
   customer_name: string;
   table_number: number;
   cart: ICard[];
-  status: "PENDING" | "PROCESSING" | "COMPLETE";
+  status: "PENDING" | "PROCESSING" | "COMPLETED";
   total: number;
 }
 

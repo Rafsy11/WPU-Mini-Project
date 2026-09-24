@@ -8,7 +8,7 @@ interface PropTypes {
 
 const ProtectedRoute = (props: PropTypes) => {
   const { children } = props;
-  const auth = localStorage.getItem("auth");
+  const auth = getLocalStorage("auth");
 
   const currentRoute = useLocation().pathname;
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./ListOrder.module.css";
-import { getOrders } from "../../../services/order.service";
+import { getOrders, updateOrder } from "../../../services/order.service";
 import Button from "../../atoms/Button";
 import { Link } from "react-router-dom";
 import type { IOrder } from "../../../types/order";
@@ -19,6 +19,12 @@ const ListOrder = () => {
       setRefectchOrder(false);
     }
   }, [refetchOrder]);
+
+  const handleCompletedOrder = async (id: string) => {
+    await updateOrder(id, { status: "COMPLETED" }).then(() => {
+      setRefectchOrder(true);
+    });
+  };
 
   return (
     <main className={styles.order}>
@@ -52,11 +58,13 @@ const ListOrder = () => {
                 <td>{order.total}</td>
                 <td>{order.status}</td>
                 <td className={styles.action}>
-                  <Link to={`orders/${order.id}`}>
+                  <Link to={`${order.id}`}>
                     <Button>Detail</Button>
                   </Link>
                   {order.status === "PROCESSING" && (
-                    <Button onClick={() => {}}>Completed</Button>
+                    <Button onClick={() => handleCompletedOrder(order.id)}>
+                      Completed
+                    </Button>
                   )}
                 </td>
               </tr>

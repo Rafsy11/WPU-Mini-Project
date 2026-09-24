@@ -3,7 +3,7 @@ import styles from "./Button.module.css";
 
 interface PropTypes {
   type?: "button" | "submit" | "reset";
-  children: string;
+  children: ReactNode;
   onClick?: () => void;
   className?: string;
   color?: "primary" | "secondary";
