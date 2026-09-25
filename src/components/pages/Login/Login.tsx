@@ -16,6 +16,10 @@ const Login = () => {
       password: form.password.value,
     };
     const result = await login(payload);
+    if (!result?.token) {
+      alert(result?.error || "Login Gagal");
+      return;
+    }
     setLocalStorage("auth", result.token);
 
     return navigate("/orders");

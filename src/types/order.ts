@@ -9,11 +9,11 @@ interface IMenu {
 }
 
 interface ICard {
-  id?: string;
   menuId?: string;
   quantity: number;
   notes: string;
   menuItem?: IMenu;
+  name?: string;
 }
 
 interface IOrder {

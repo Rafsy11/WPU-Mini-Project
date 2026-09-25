@@ -1,4 +1,5 @@
 import { environment } from "../constants/environment";
+import type { ICard } from "../types/order";
 import { fetchAPI } from "../utils/fetch";
 import { getLocalStorage } from "../utils/storage";
 
@@ -24,6 +25,22 @@ export const getOrderById = async (id: string) => {
       Authorization: `Bearer ${getLocalStorage("auth")}`,
     },
   }).then((data) => data);
+
+  return result;
+};
+
+export const createOrder = async (payload: {
+  customerName: string;
+  tableNumber: number;
+  cart: ICard[];
+}) => {
+  const result = await fetchAPI(`${environment.API_URL}/orders`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${getLocalStorage("auth")}`,
+    },
+    body: JSON.stringify(payload),
+  });
 
   return result;
 };

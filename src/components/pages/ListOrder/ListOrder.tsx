@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "./ListOrder.module.css";
 import { getOrders, updateOrder } from "../../../services/order.service";
 import Button from "../../atoms/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { IOrder } from "../../../types/order";
+import { removeLocalStorage } from "../../../utils/storage";
 
 const ListOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -13,7 +14,7 @@ const ListOrder = () => {
     if (refetchOrder) {
       const fetchOrder = async () => {
         const result = await getOrders();
-        setOrders(result.data);
+        setOrders(result?.data || []);
       };
       fetchOrder();
       setRefectchOrder(false);
@@ -26,6 +27,13 @@ const ListOrder = () => {
     });
   };
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    removeLocalStorage("auth");
+    return navigate("/login");
+  };
+
   return (
     <main className={styles.order}>
       <section className={styles.header}>
@@ -34,7 +42,9 @@ const ListOrder = () => {
           <Link to="/create">
             <Button>Create Order</Button>
           </Link>
-          <Button color="secondary">Logout</Button>
+          <Button color="secondary" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
       </section>
       <section>
@@ -50,7 +60,7 @@ const ListOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order: IOrder, index: number) => (
+            {orders?.map((order: IOrder, index: number) => (
               <tr key={order.id}>
                 <td>{index + 1}</td>
                 <td>{order.customer_name}</td>
