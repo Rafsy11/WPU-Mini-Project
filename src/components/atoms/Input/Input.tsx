@@ -1,4 +1,5 @@
 import styles from "./Input.module.css";
+import type { ChangeEvent } from "react";
 
 interface PropTypes {
   label?: string;
@@ -8,6 +9,8 @@ interface PropTypes {
   placeholder?: string;
   required?: boolean;
   className?: string;
+  value?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = (props: PropTypes) => {
@@ -19,6 +22,8 @@ const Input = (props: PropTypes) => {
     placeholder,
     required = false,
     className,
+    value,
+    onChange,
   } = props;
 
   return (
@@ -31,6 +36,8 @@ const Input = (props: PropTypes) => {
         name={name}
         placeholder={placeholder}
         required={required}
+        value={value}
+        onChange={onChange}
       />
     </label>
   );

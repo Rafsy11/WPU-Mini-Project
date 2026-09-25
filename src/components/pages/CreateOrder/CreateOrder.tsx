@@ -13,14 +13,27 @@ const CreateOrder = () => {
   const [menus, setMenus] = useState<IMenu[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [carts, setCarts] = useState<ICard[]>([]);
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const category = searchParams.get("category") || "";
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 400);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [search]);
 
   useEffect(() => {
     const fetchOrder = async () => {
-      const result = await getMenus(searchParams.get("category") as string);
+      const result = await getMenus(category, debouncedSearch);
       setMenus(result.data);
     };
     fetchOrder();
-  }, [searchParams.get("category")]);
+  }, [category, debouncedSearch]);
 
   const handleAddToCart = (type: string, id: string, name: string) => {
     const itemIsInCart = carts.find((item: ICard) => item.menuId === id);
@@ -81,6 +94,14 @@ const CreateOrder = () => {
     <main className={styles.create}>
       <div className={styles.menu}>
         <h1>Explore Our Best Menu</h1>
+        <Input
+          id="search"
+          name="search"
+          placeholder="Cari menu makanan/minuman..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className={styles.search}
+        />
         <div className={styles.filter}>
           {filters.map((filter) => (
             <Button
@@ -101,28 +122,34 @@ const CreateOrder = () => {
           ))}
         </div>
         <div className={styles.list}>
-          {menus.map((item: IMenu) => (
-            <div className={styles.item} key={item.id}>
-              <img
-                src={item.image_url}
-                alt={item.name}
-                loading="lazy"
-                className={styles.image}
-              />
-              <h2>{item.name}</h2>
-              <p className={styles.description}>{item.description}</p>
-              <div className={styles.bottom}>
-                <p className={styles.price}>${item.price}</p>
-                <Button
-                  onClick={() =>
-                    handleAddToCart("increment", `${item.id}`, `${item.name}`)
-                  }
-                >
-                  Add to cart
-                </Button>
+          {menus.length > 0 ? (
+            menus.map((item: IMenu) => (
+              <div className={styles.item} key={item.id}>
+                <img
+                  src={item.image_url}
+                  alt={item.name}
+                  loading="lazy"
+                  className={styles.image}
+                />
+                <h2>{item.name}</h2>
+                <p className={styles.description}>{item.description}</p>
+                <div className={styles.bottom}>
+                  <p className={styles.price}>${item.price}</p>
+                  <Button
+                    onClick={() =>
+                      handleAddToCart("increment", `${item.id}`, `${item.name}`)
+                    }
+                  >
+                    Add to cart
+                  </Button>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className={styles.empty}>
+              <p>Menu "{search}" tidak ditemukan</p>
             </div>
-          ))}
+          )}
         </div>
       </div>
       <form className={styles.form} onSubmit={handleOrder}>
