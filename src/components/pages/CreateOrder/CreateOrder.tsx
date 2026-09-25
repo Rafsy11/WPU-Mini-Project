@@ -13,7 +13,6 @@ const CreateOrder = () => {
   const [menus, setMenus] = useState<IMenu[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [carts, setCarts] = useState<ICard[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchOrder = async () => {
